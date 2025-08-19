@@ -126,9 +126,11 @@ importers:
       got:
         specifier: ^14.4.1
         version: 14.4.7
+ codex/update-snapshots-and-commit-changes-a8g70e
       handlebars:
         specifier: ^4.7.8
         version: 4.7.8
+main
       ioredis:
         specifier: ^5.3.2
         version: 5.7.0
@@ -2497,8 +2499,10 @@ packages:
   jose@4.15.9:
     resolution: {integrity: sha512-1vUQX+IdDMVPj4k8kOxgUqlcK518yluMuGZwqlr44FS1ppZB/5GWh4rZG89erpOBOJjU/OBsnCVFfapsRz6nEA==}
 
+ codex/update-snapshots-and-commit-changes-a8g70e
   jpeg-exif@1.1.4:
     resolution: {integrity: sha512-a+bKEcCjtuW5WTdgeXFzswSrdqi0jk4XlEtZlx5A94wCoBpFjfFTbo/Tra5SpNCl/YFZPvcV1dJc+TAYeg6ROQ==}
+
 
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
@@ -2745,9 +2749,12 @@ packages:
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
 
+ codex/update-snapshots-and-commit-changes-a8g70e
   neo-async@2.6.2:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
 
+
+ main
   next-auth@4.24.11:
     resolution: {integrity: sha512-pCFXzIDQX7xmHFs4KVH4luCjaCbuPRtZ9oBUjUhOk84mZ9WVPf94n87TxYI4rSRf9HmfHEF8Yep3JrYDVOo3Cw==}
     peerDependencies:
@@ -6529,8 +6536,10 @@ snapshots:
 
   jose@4.15.9: {}
 
+ codex/update-snapshots-and-commit-changes-a8g70e
   jpeg-exif@1.1.4: {}
 
+ main
   js-tokens@4.0.0: {}
 
   js-tokens@9.0.1: {}
@@ -6793,8 +6802,9 @@ snapshots:
 
   natural-compare@1.4.0: {}
 
+ codex/update-snapshots-and-commit-changes-a8g70e
   neo-async@2.6.2: {}
-
+> main
   next-auth@4.24.11(next@14.2.32(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(nodemailer@6.10.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@babel/runtime': 7.28.3
