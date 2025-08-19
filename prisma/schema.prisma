@@ -42,6 +42,35 @@ enum RequestStatus {
   rejected
 }
 
+enum TicketType {
+  general
+  erasure
+  deindex
+  incident
+  other
+}
+
+enum TicketPriority {
+  low
+  medium
+  high
+  urgent
+}
+
+enum TicketStatus {
+  inbox
+  triage
+  in_progress
+  waiting_client
+  resolved
+  closed
+}
+
+enum SentVia {
+  EMAIL
+  PDF_ONLY
+}
+
 enum Severity {
   low
   med
@@ -75,7 +104,15 @@ model ClientProfile {
   aliases      String[] @default([])
   city         String?
   consentFlags Json
-  user         User     @relation(fields: [userId], references: [id])
+  kycStatus    KycStatus @default(UNVERIFIED)
+  idDocs       Json[]    @default([])
+  user         User      @relation(fields: [userId], references: [id])
+}
+
+enum KycStatus {
+  UNVERIFIED
+  PENDING
+  VERIFIED
 }
 
 model Case {
@@ -106,13 +143,19 @@ model Target {
 model Request {
   id       String        @id @default(uuid())
   caseId   String
-  targetId String?
   kind     RequestKind
   status   RequestStatus @default(draft)
-  payload  Json
-  sentAt   DateTime?
-  case     Case          @relation(fields: [caseId], references: [id])
-  target   Target?       @relation(fields: [targetId], references: [id])
+  legalBasis     String
+  recipientEmail String
+  recipientName  String?
+  payload        Json
+  attachments    Json[]      @default([])
+  sentVia        SentVia?
+  pdfPath        String?
+  createdAt      DateTime    @default(now())
+  dueAt          DateTime
+  sentAt         DateTime?
+  case           Case        @relation(fields: [caseId], references: [id])
 }
 
 model ScanFinding {
@@ -136,11 +179,96 @@ model AuditLog {
   id          String   @id @default(uuid())
   actorUserId String?
   caseId      String?
-  action      String
+  action      AuditAction
   details     Json
   createdAt   DateTime @default(now())
   actor       User?    @relation("AuditLogsActor", fields: [actorUserId], references: [id])
   case        Case?    @relation(fields: [caseId], references: [id])
+}
+
+model Ticket {
+  id          String        @id @default(uuid())
+  code        String        @unique
+  title       String
+  description String
+  type        TicketType    @default(general)
+  priority    TicketPriority @default(medium)
+  status      TicketStatus  @default(inbox)
+  requesterId String
+  assigneeId  String?
+  caseId      String?
+  tags        String[]      @default([])
+  dueAt       DateTime?
+  closedAt    DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  requester   User          @relation("TicketRequester", fields: [requesterId], references: [id])
+  assignee    User?         @relation("TicketAssignee", fields: [assigneeId], references: [id])
+  case        Case?         @relation(fields: [caseId], references: [id])
+  comments    TicketComment[]
+  events      TicketEvent[]
+}
+
+model TicketComment {
+  id          String   @id @default(uuid())
+  ticketId    String
+  authorId    String
+  body        String
+  internal    Boolean  @default(false)
+  attachments Json[]   @default([])
+  createdAt   DateTime @default(now())
+  ticket      Ticket   @relation(fields: [ticketId], references: [id])
+  author      User     @relation(fields: [authorId], references: [id])
+}
+
+model TicketEvent {
+  id          String         @id @default(uuid())
+  ticketId    String
+  type        TicketEventType
+  payload     Json
+  createdAt   DateTime       @default(now())
+  actorUserId String?
+  ticket      Ticket         @relation(fields: [ticketId], references: [id])
+  actor       User?          @relation(fields: [actorUserId], references: [id])
+}
+
+enum TicketEventType {
+  created
+  updated
+  status_changed
+  assignee_changed
+  comment_added
+  attachment_added
+  emailed
+}
+
+model SLASetting {
+  id                   String     @id @default(uuid())
+  name                 String
+  forType              TicketType
+  targetResponseHours  Int
+  targetResolutionHours Int
+  active               Boolean    @default(true)
+}
+
+model NotificationSetting {
+  id            String  @id @default(uuid())
+  userId        String  @unique
+  emailOnAssign Boolean @default(true)
+  emailOnStatus Boolean @default(true)
+  user          User    @relation(fields: [userId], references: [id])
+}
+
+enum AuditAction {
+  REQUEST_CREATE
+  REQUEST_SEND
+  REQUEST_FAIL
+  TICKET_CREATE
+  TICKET_UPDATE
+  TICKET_COMMENT
+  TICKET_STATUS
+  TICKET_ASSIGN
+  TICKET_CLOSE
 }
 
 model Invoice {
