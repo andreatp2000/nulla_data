@@ -18,6 +18,6 @@
       "@nulladata/config": ["packages/config/src"]
     }
   },
-  "include": ["packages", "apps", "types", "vitest.config.ts"],
+  "include": ["packages", "apps", "types", "vitest.config.ts", "prisma"],
   "exclude": ["node_modules"]
 }

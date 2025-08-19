@@ -37,6 +37,7 @@ APP_BASE_URL=http://localhost:3000
 pnpm i
 pnpm prisma generate
 pnpm prisma migrate dev
+pnpm prisma db seed
 pnpm dev
 
 ## Regole implementative

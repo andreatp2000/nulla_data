@@ -35,8 +35,11 @@ Servizi esposti:
 pnpm i
 pnpm prisma generate
 pnpm prisma migrate dev
+pnpm prisma db seed
 pnpm dev
 ```
+
+Il seed crea un utente admin demo e un caso di esempio con tre targets.
 
 ## Script
 
