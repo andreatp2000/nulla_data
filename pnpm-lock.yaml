@@ -73,7 +73,7 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui
       '@prisma/client':
-        specifier: ^5.9.1
+        specifier: ^5.16.1
         version: 5.22.0(prisma@5.22.0)
       bullmq:
         specifier: ^4.13.0
@@ -94,7 +94,7 @@ importers:
         specifier: ^0.13.0
         version: 0.13.0
       prisma:
-        specifier: ^5.9.1
+        specifier: ^5.16.1
         version: 5.22.0
       react:
         specifier: ^18.2.0
