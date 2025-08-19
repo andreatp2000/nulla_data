@@ -52,6 +52,7 @@ Le unit test coprono la funzione di normalizzazione, il generatore PDF e i compo
 
 Il generatore di richieste privacy è completamente locale e produce PDF tramite `pdfkit`.
 Le template Markdown si trovano in `templates/` e sono renderizzate con Handlebars.
+Il modello `Request` in Prisma gestisce collegamenti a `Case` e `Target`, oltre a base giuridica e destinatari.
 
 Per inviare le richieste via email occorre configurare un server SMTP (in sviluppo è previsto [MailHog](https://github.com/mailhog/MailHog)).
 
@@ -68,8 +69,9 @@ Le API principali sono:
 
 < codex/update-snapshots-and-commit-changes-o58o1v
 
- codex/update-snapshots-and-commit-changes-zof7sn
- main
+codex/update-snapshots-and-commit-changes-zof7sn
+main
+
 ## De-index assistant
 
 Il flusso guidato di de-indicizzazione utilizza un file di configurazione locale
@@ -80,7 +82,7 @@ ai portali: ogni submit deve essere completato manualmente dall'analista.
 
 Per aggiungere o aggiornare i portali supportati modificare il file JSON
 mantenendo la struttura `{ "engines": { ... }, "contactOrigin": { ... } }`.
- codex/update-snapshots-and-commit-changes-o58o1v
+codex/update-snapshots-and-commit-changes-o58o1v
 
 ## Workspaces e ticketing
 
@@ -97,9 +99,9 @@ associate ai case. Ogni ticket ha codice, stato, priorità, eventi e
 commenti. Le API iniziali includono `POST /api/tickets` per la creazione
 di un nuovo ticket e registrano l'azione in `AuditLog`.
 
-
 > main
- main
+> main
+
 ## Motore di discovery
 
 La scansione delle tracce digitali utilizza `got` e `cheerio` con rispetto di `robots.txt` e rate-limit.
