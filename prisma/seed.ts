@@ -1,11 +1,9 @@
-
 import { PrismaClient } from '@prisma/client'
 
-const prisma = new PrismaClient()
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const prisma: any = new PrismaClient()
 
-async function main() {
-
-}
+async function main() {}
 
 main()
   .catch((e) => {
@@ -13,5 +11,5 @@ main()
     process.exit(1)
   })
   .finally(async () => {
-n
+    await prisma.$disconnect()
   })

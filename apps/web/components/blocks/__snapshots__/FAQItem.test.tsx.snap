@@ -1,0 +1,20 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`faq item snapshot 1`] = `
+<div>
+  <details
+    class="rounded border border-nd-surface p-4"
+  >
+    <summary
+      class="cursor-pointer font-medium"
+    >
+      Q
+    </summary>
+    <p
+      class="mt-2 text-sm text-nd-muted"
+    >
+      A
+    </p>
+  </details>
+</div>
+`;

@@ -1,0 +1,37 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`pricing card snapshot 1`] = `
+<div>
+  <div
+    class="rounded-lg border p-6 border-nd-surface flex flex-col"
+  >
+    <h3
+      class="mb-2 text-xl font-semibold"
+    >
+      Test
+    </h3>
+    <p
+      class="mb-4 text-3xl font-bold"
+    >
+      10€
+    </p>
+    <ul
+      class="mb-6 flex-1 space-y-2 text-sm"
+    >
+      <li>
+        • 
+        a
+      </li>
+      <li>
+        • 
+        b
+      </li>
+    </ul>
+    <button
+      class="rounded bg-nd-primary py-2 text-black hover:bg-nd-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nd-ring"
+    >
+      Scegli
+    </button>
+  </div>
+</div>
+`;
