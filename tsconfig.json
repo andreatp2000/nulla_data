@@ -12,8 +12,7 @@
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "baseUrl": ".",
-    "jsx": "react-jsx",
-    }
+    "jsx": "react-jsx"
   },
   "include": ["packages", "apps", "types", "vitest.config.ts", "prisma"],
   "exclude": ["node_modules"]

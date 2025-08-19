@@ -28,7 +28,6 @@ Servizi esposti:
 - Redis:6379
 - Meilisearch:7700 (`MEILI_MASTER_KEY=dev_key`)
 
-
 ## Setup
 
 ```bash
@@ -39,8 +38,6 @@ pnpm prisma db seed
 pnpm dev
 ```
 
-
-
 ## Script
 
 - `pnpm dev` – avvia `apps/web`
@@ -49,7 +46,14 @@ pnpm dev
 
 ## Testing
 
-Le unit test coprono la funzione di normalizzazione e il generatore PDF (PDFKit).
+Le unit test coprono la funzione di normalizzazione, il generatore PDF e i componenti UI di base.
+
+## Personalizzare la landing
+
+- I testi e le sezioni della pagina marketing si trovano in `apps/web/app/(marketing)/page.tsx`.
+- La palette del tema scuro è definita in `packages/config/theme.css`.
+- I font sono configurati in `apps/web/app/layout.tsx` tramite `next/font`.
+- Le animazioni rispettano `prefers-reduced-motion`; per disattivarle forzare questa preferenza o adattare l'helper in `apps/web/lib/a11y.ts`.
 
 ## PDF
 
