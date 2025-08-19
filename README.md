@@ -39,6 +39,8 @@ pnpm prisma db seed
 pnpm dev
 ```
 
+Configura le variabili ambiente creando un file `.env` a partire da `.env.example` e impostando `SMTP_FROM` con l'indirizzo mittente desiderato.
+
 Il seed crea un utente admin demo e un caso di esempio con tre targets.
 
 ## Script
