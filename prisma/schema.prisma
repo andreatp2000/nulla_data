@@ -42,7 +42,6 @@ enum RequestStatus {
   rejected
 }
 
-codex/update-snapshots-and-commit-changes-o58o1v
 enum TicketType {
   general
   erasure
@@ -67,8 +66,6 @@ enum TicketStatus {
   closed
 }
 
-
- main
 enum SentVia {
   EMAIL
   PDF_ONLY
@@ -94,12 +91,19 @@ enum TaskStatus {
 }
 
 model User {
-  id            String         @id @default(uuid())
-  email         String         @unique
-  name          String?
-  role          Role           @default(client)
-  createdAt     DateTime       @default(now())
-
+  id                  String               @id @default(uuid())
+  email               String               @unique
+  name                String?
+  role                Role                 @default(client)
+  createdAt           DateTime             @default(now())
+  clientProfile       ClientProfile?
+  cases               Case[]
+  auditLogs           AuditLog[]           @relation("AuditLogsActor")
+  requestedTickets    Ticket[]             @relation("TicketRequester")
+  assignedTickets     Ticket[]             @relation("TicketAssignee")
+  ticketComments      TicketComment[]
+  ticketEvents        TicketEvent[]
+  notificationSetting NotificationSetting?
 }
 
 model ClientProfile {
@@ -131,23 +135,25 @@ model Case {
   tasks        Task[]
   auditLogs    AuditLog[]
   invoices     Invoice[]
+  tickets      Ticket[]
 }
 
 model Target {
-
-  caseId   String
-  domain   String
-  type     TargetType
-  notes    String?
-
+  id      String     @id @default(uuid())
+  caseId  String
+  domain  String
+  type    TargetType
+  notes   String?
+  case    Case       @relation(fields: [caseId], references: [id])
   requests Request[]
 }
 
 model Request {
-  id       String        @id @default(uuid())
-  caseId   String
-  kind     RequestKind
-  status   RequestStatus @default(draft)
+  id             String        @id @default(uuid())
+  caseId         String
+  targetId       String?
+  kind           RequestKind
+  status         RequestStatus @default(draft)
   legalBasis     String
   recipientEmail String
   recipientName  String?
@@ -159,6 +165,7 @@ model Request {
   dueAt          DateTime
   sentAt         DateTime?
   case           Case        @relation(fields: [caseId], references: [id])
+  target         Target?     @relation(fields: [targetId], references: [id])
 }
 
 model ScanFinding {
@@ -175,7 +182,12 @@ model ScanFinding {
 }
 
 model Task {
-
+  id     String    @id @default(uuid())
+  caseId String
+  type   TaskType
+  status TaskStatus @default(queued)
+  log    String?
+  case   Case      @relation(fields: [caseId], references: [id])
 }
 
 model AuditLog {
@@ -189,26 +201,25 @@ model AuditLog {
   case        Case?    @relation(fields: [caseId], references: [id])
 }
 
- codex/update-snapshots-and-commit-changes-o58o1v
 model Ticket {
-  id          String        @id @default(uuid())
-  code        String        @unique
+  id          String         @id @default(uuid())
+  code        String         @unique
   title       String
   description String
-  type        TicketType    @default(general)
+  type        TicketType     @default(general)
   priority    TicketPriority @default(medium)
-  status      TicketStatus  @default(inbox)
+  status      TicketStatus   @default(inbox)
   requesterId String
   assigneeId  String?
   caseId      String?
-  tags        String[]      @default([])
+  tags        String[]       @default([])
   dueAt       DateTime?
   closedAt    DateTime?
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-  requester   User          @relation("TicketRequester", fields: [requesterId], references: [id])
-  assignee    User?         @relation("TicketAssignee", fields: [assigneeId], references: [id])
-  case        Case?         @relation(fields: [caseId], references: [id])
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  requester   User           @relation("TicketRequester", fields: [requesterId], references: [id])
+  assignee    User?          @relation("TicketAssignee", fields: [assigneeId], references: [id])
+  case        Case?          @relation(fields: [caseId], references: [id])
   comments    TicketComment[]
   events      TicketEvent[]
 }
@@ -247,12 +258,12 @@ enum TicketEventType {
 }
 
 model SLASetting {
-  id                   String     @id @default(uuid())
-  name                 String
-  forType              TicketType
-  targetResponseHours  Int
+  id                    String     @id @default(uuid())
+  name                  String
+  forType               TicketType
+  targetResponseHours   Int
   targetResolutionHours Int
-  active               Boolean    @default(true)
+  active                Boolean    @default(true)
 }
 
 model NotificationSetting {
@@ -263,20 +274,16 @@ model NotificationSetting {
   user          User    @relation(fields: [userId], references: [id])
 }
 
- main
 enum AuditAction {
   REQUEST_CREATE
   REQUEST_SEND
   REQUEST_FAIL
- codex/update-snapshots-and-commit-changes-o58o1v
   TICKET_CREATE
   TICKET_UPDATE
   TICKET_COMMENT
   TICKET_STATUS
   TICKET_ASSIGN
   TICKET_CLOSE
-
- main
 }
 
 model Invoice {
@@ -285,3 +292,4 @@ model Invoice {
   case      Case?    @relation(fields: [caseId], references: [id])
   createdAt DateTime @default(now())
 }
+
