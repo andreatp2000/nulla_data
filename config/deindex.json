@@ -1,0 +1,15 @@
+{
+  "engines": {
+    "google": {
+      "url": "https://support.google.com/legal/troubleshooter/3111061",
+      "instructions": "Apri il modulo ufficiale di Google per richiedere la rimozione dell'URL dai risultati di ricerca."
+    },
+    "bing": {
+      "url": "https://www.bing.com/webmaster/tools/content-removal",
+      "instructions": "Richiede un account Bing Webmaster; invia la richiesta di rimozione manualmente."
+    }
+  },
+  "contactOrigin": {
+    "instructions": "Contatta direttamente il sito di origine via email o modulo di contatto; allega eventuali prove."
+  }
+}
