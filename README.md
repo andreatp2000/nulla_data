@@ -27,7 +27,7 @@ Servizi esposti:
 - Postgres:5432 (user `postgres`, pass `postgres`)
 - Redis:6379
 - Meilisearch:7700 (`MEILI_MASTER_KEY=dev_key`)
-- MailHog UI:8025
+
 
 ## Setup
 
@@ -39,11 +39,7 @@ pnpm prisma db seed
 pnpm dev
 ```
 
-Il seed crea un utente admin demo e un caso di esempio con tre targets.
 
-## Auth
-
-L'app utilizza [NextAuth](https://next-auth.js.org/) con provider Email. In sviluppo le email vengono inviate via SMTP a [MailHog](http://localhost:8025) (host `mailhog`, porta `1025`).
 
 ## Script
 

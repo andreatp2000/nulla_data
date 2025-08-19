@@ -13,10 +13,6 @@
     "noEmit": true,
     "baseUrl": ".",
     "jsx": "react-jsx",
-    "paths": {
-      "@nulladata/ui": ["packages/ui/src"],
-      "@nulladata/config": ["packages/config/src"],
-      "@/*": ["apps/web/*"]
     }
   },
   "include": ["packages", "apps", "types", "vitest.config.ts", "prisma"],

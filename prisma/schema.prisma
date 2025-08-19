@@ -67,12 +67,7 @@ model User {
   name          String?
   role          Role           @default(client)
   createdAt     DateTime       @default(now())
-  emailVerified DateTime?
-  clientProfile ClientProfile?
-  cases         Case[]
-  auditLogs     AuditLog[]     @relation("AuditLogsActor")
-  accounts      Account[]
-  sessions      Session[]
+
 }
 
 model ClientProfile {
@@ -99,12 +94,12 @@ model Case {
 }
 
 model Target {
-  id       String   @id @default(uuid())
+
   caseId   String
   domain   String
   type     TargetType
   notes    String?
-  case     Case     @relation(fields: [caseId], references: [id])
+
   requests Request[]
 }
 
@@ -134,12 +129,7 @@ model ScanFinding {
 }
 
 model Task {
-  id      String     @id @default(uuid())
-  caseId  String
-  type    TaskType
-  status  TaskStatus @default(queued)
-  log     String?
-  case    Case       @relation(fields: [caseId], references: [id])
+
 }
 
 model AuditLog {
@@ -158,38 +148,4 @@ model Invoice {
   caseId    String?
   case      Case?    @relation(fields: [caseId], references: [id])
   createdAt DateTime @default(now())
-}
-
-model Account {
-  id                String   @id @default(uuid())
-  userId            String
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String?  @map("refresh_token")
-  access_token      String?  @map("access_token")
-  expires_at        Int?     @map("expires_at")
-  token_type        String?  @map("token_type")
-  scope             String?
-  id_token          String?  @map("id_token")
-  session_state     String?  @map("session_state")
-  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([provider, providerAccountId])
-}
-
-model Session {
-  id           String   @id @default(uuid())
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-model VerificationToken {
-  identifier String
-  token      String   @unique
-  expires    DateTime
-
-  @@unique([identifier, token])
 }
