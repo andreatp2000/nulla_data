@@ -21,15 +21,11 @@
     "nodemailer": "^6.9.8",
     "pdfkit": "^0.13.0",
     "framer-motion": "^12.3.0",
-codex/create-nulladata-landing-page-p24bat
     "lucide-react": "^0.446.0",
     "got": "^14.4.1",
     "cheerio": "^1.0.0-rc.12",
     "robots-parser": "^3.0.0",
     "p-limit": "^4.0.0"
-
-    "lucide-react": "^0.446.0"
- main
   },
   "devDependencies": {
     "autoprefixer": "^10.4.16",
