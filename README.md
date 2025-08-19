@@ -48,6 +48,24 @@ pnpm dev
 
 Le unit test coprono la funzione di normalizzazione, il generatore PDF e i componenti UI di base.
 
+## DSAR
+
+Il generatore di richieste privacy è completamente locale e produce PDF tramite `pdfkit`.
+Le template Markdown si trovano in `templates/` e sono renderizzate con Handlebars.
+
+Per inviare le richieste via email occorre configurare un server SMTP (in sviluppo è previsto [MailHog](https://github.com/mailhog/MailHog)).
+
+```bash
+SMTP_HOST=localhost
+SMTP_PORT=1025
+```
+
+Le API principali sono:
+
+- `POST /api/requests/:caseId/create` – crea bozza e registra audit log
+- `POST /api/requests/:id/render` – genera PDF della richiesta
+- `POST /api/requests/:id/send` – accoda l'invio tramite BullMQ
+
 ## Motore di discovery
 
 La scansione delle tracce digitali utilizza `got` e `cheerio` con rispetto di `robots.txt` e rate-limit.
@@ -61,7 +79,6 @@ Per avviare manualmente una scansione:
 ```bash
 pnpm tsx apps/web/jobs/discovery.ts
 ```
-
 
 ## Personalizzare la landing
 
