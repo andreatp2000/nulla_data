@@ -42,6 +42,7 @@ enum RequestStatus {
   rejected
 }
 
+codex/update-snapshots-and-commit-changes-o58o1v
 enum TicketType {
   general
   erasure
@@ -66,6 +67,8 @@ enum TicketStatus {
   closed
 }
 
+
+ main
 enum SentVia {
   EMAIL
   PDF_ONLY
@@ -186,6 +189,7 @@ model AuditLog {
   case        Case?    @relation(fields: [caseId], references: [id])
 }
 
+ codex/update-snapshots-and-commit-changes-o58o1v
 model Ticket {
   id          String        @id @default(uuid())
   code        String        @unique
@@ -259,16 +263,20 @@ model NotificationSetting {
   user          User    @relation(fields: [userId], references: [id])
 }
 
+ main
 enum AuditAction {
   REQUEST_CREATE
   REQUEST_SEND
   REQUEST_FAIL
+ codex/update-snapshots-and-commit-changes-o58o1v
   TICKET_CREATE
   TICKET_UPDATE
   TICKET_COMMENT
   TICKET_STATUS
   TICKET_ASSIGN
   TICKET_CLOSE
+
+ main
 }
 
 model Invoice {

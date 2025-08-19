@@ -66,6 +66,10 @@ Le API principali sono:
 - `POST /api/requests/:id/render` – genera PDF della richiesta
 - `POST /api/requests/:id/send` – accoda l'invio tramite BullMQ
 
+< codex/update-snapshots-and-commit-changes-o58o1v
+
+ codex/update-snapshots-and-commit-changes-zof7sn
+ main
 ## De-index assistant
 
 Il flusso guidato di de-indicizzazione utilizza un file di configurazione locale
@@ -76,6 +80,7 @@ ai portali: ogni submit deve essere completato manualmente dall'analista.
 
 Per aggiungere o aggiornare i portali supportati modificare il file JSON
 mantenendo la struttura `{ "engines": { ... }, "contactOrigin": { ... } }`.
+ codex/update-snapshots-and-commit-changes-o58o1v
 
 ## Workspaces e ticketing
 
@@ -92,6 +97,9 @@ associate ai case. Ogni ticket ha codice, stato, priorità, eventi e
 commenti. Le API iniziali includono `POST /api/tickets` per la creazione
 di un nuovo ticket e registrano l'azione in `AuditLog`.
 
+
+> main
+ main
 ## Motore di discovery
 
 La scansione delle tracce digitali utilizza `got` e `cheerio` con rispetto di `robots.txt` e rate-limit.
