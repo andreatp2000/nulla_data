@@ -62,6 +62,7 @@ Per avviare manualmente una scansione:
 pnpm tsx apps/web/jobs/discovery.ts
 ```
 
+
 ## Personalizzare la landing
 
 - I testi e le sezioni della pagina marketing si trovano in `apps/web/app/(marketing)/page.tsx`.

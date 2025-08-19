@@ -1,7 +1,10 @@
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { ParallaxImage } from './ParallaxImage'
+
 import { vi, test, expect } from 'vitest'
+=======
+import { vi } from 'vitest'
 
 vi.mock('framer-motion', async () => {
   const actual =
