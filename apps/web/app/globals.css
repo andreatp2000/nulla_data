@@ -1,3 +1,35 @@
+@import '../../../packages/config/theme.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  @apply bg-nd-bg text-white antialiased;
+}
+
+:focus-visible {
+  outline: 2px solid var(--nd-ring);
+  outline-offset: 2px;
+}
+@keyframes mesh {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+.animate-mesh {
+  background: radial-gradient(at 25% 25%, var(--nd-secondary), transparent 60%),
+    radial-gradient(at 75% 75%, var(--nd-primary), transparent 60%);
+  background-size: 200% 200%;
+  animation: mesh 20s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-mesh {
+    animation: none;
+  }
+}

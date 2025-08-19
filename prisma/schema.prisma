@@ -42,6 +42,11 @@ enum RequestStatus {
   rejected
 }
 
+enum SentVia {
+  EMAIL
+  PDF_ONLY
+}
+
 enum Severity {
   low
   med
@@ -75,7 +80,15 @@ model ClientProfile {
   aliases      String[] @default([])
   city         String?
   consentFlags Json
+  kycStatus    KycStatus @default(UNVERIFIED)
+  idDocs       Json[]    @default([])
   user         User     @relation(fields: [userId], references: [id])
+}
+
+enum KycStatus {
+  UNVERIFIED
+  PENDING
+  VERIFIED
 }
 
 model Case {
@@ -94,7 +107,7 @@ model Case {
 }
 
 model Target {
-
+  id       String   @id @default(uuid())
   caseId   String
   domain   String
   type     TargetType
@@ -111,6 +124,13 @@ model Request {
   status   RequestStatus @default(draft)
   payload  Json
   sentAt   DateTime?
+  legalBasis    String?
+  dueAt         DateTime?
+  recipientEmail String?
+  recipientName  String?
+  attachments    Json[]    @default([])
+  sentVia        SentVia?
+  pdfPath        String?
   case     Case          @relation(fields: [caseId], references: [id])
   target   Target?       @relation(fields: [targetId], references: [id])
 }
@@ -132,15 +152,21 @@ model Task {
 
 }
 
+enum AuditAction {
+  REQUEST_CREATE
+  REQUEST_SEND
+  REQUEST_FAIL
+}
+
 model AuditLog {
-  id          String   @id @default(uuid())
+  id          String      @id @default(uuid())
   actorUserId String?
   caseId      String?
-  action      String
+  action      AuditAction
   details     Json
-  createdAt   DateTime @default(now())
-  actor       User?    @relation("AuditLogsActor", fields: [actorUserId], references: [id])
-  case        Case?    @relation(fields: [caseId], references: [id])
+  createdAt   DateTime    @default(now())
+  actor       User?       @relation("AuditLogsActor", fields: [actorUserId], references: [id])
+  case        Case?       @relation(fields: [caseId], references: [id])
 }
 
 model Invoice {
