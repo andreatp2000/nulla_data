@@ -96,12 +96,12 @@ model Case {
 }
 
 model Target {
-  id       String   @id @default(uuid())
+  id       String     @id @default(uuid())
   caseId   String
   domain   String
   type     TargetType
   notes    String?
-  case     Case     @relation(fields: [caseId], references: [id])
+  case     Case       @relation(fields: [caseId], references: [id])
   requests Request[]
 }
 
@@ -131,12 +131,12 @@ model ScanFinding {
 }
 
 model Task {
-  id      String     @id @default(uuid())
-  caseId  String
-  type    TaskType
-  status  TaskStatus @default(queued)
-  log     String?
-  case    Case       @relation(fields: [caseId], references: [id])
+  id     String     @id @default(uuid())
+  caseId String
+  type   TaskType
+  status TaskStatus @default(queued)
+  log    String?
+  case   Case       @relation(fields: [caseId], references: [id])
 }
 
 model AuditLog {
