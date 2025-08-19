@@ -66,6 +66,7 @@ Le API principali sono:
 - `POST /api/requests/:id/render` – genera PDF della richiesta
 - `POST /api/requests/:id/send` – accoda l'invio tramite BullMQ
 
+ codex/update-snapshots-and-commit-changes-zof7sn
 ## De-index assistant
 
 Il flusso guidato di de-indicizzazione utilizza un file di configurazione locale
@@ -76,7 +77,7 @@ ai portali: ogni submit deve essere completato manualmente dall'analista.
 
 Per aggiungere o aggiornare i portali supportati modificare il file JSON
 mantenendo la struttura `{ "engines": { ... }, "contactOrigin": { ... } }`.
-
+> main
 ## Motore di discovery
 
 La scansione delle tracce digitali utilizza `got` e `cheerio` con rispetto di `robots.txt` e rate-limit.
