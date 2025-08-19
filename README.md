@@ -48,6 +48,21 @@ pnpm dev
 
 Le unit test coprono la funzione di normalizzazione, il generatore PDF e i componenti UI di base.
 
+## Motore di discovery
+
+La scansione delle tracce digitali utilizza `got` e `cheerio` con rispetto di `robots.txt` e rate-limit.
+
+- Query generate da `ClientProfile` e pattern configurabili (`apps/web/lib/discovery.ts`).
+- I risultati sono normalizzati e deduplicati prima di essere salvati in `ScanFinding` con severità basata sul dominio.
+- Il job periodico viene schedulato tramite BullMQ: `enqueueDailyScans` in `apps/web/jobs/discovery.ts` aggiunge un job ogni 24h per i casi in stato `monitoring`.
+
+Per avviare manualmente una scansione:
+
+```bash
+pnpm tsx apps/web/jobs/discovery.ts
+```
+
+
 ## Personalizzare la landing
 
 - I testi e le sezioni della pagina marketing si trovano in `apps/web/app/(marketing)/page.tsx`.
