@@ -12,6 +12,4 @@ main()
     process.exit(1)
   })
   .finally(async () => {
-    // @ts-expect-error - Prisma types may not include $disconnect
-    await prisma.$disconnect()
   })

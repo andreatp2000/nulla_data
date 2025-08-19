@@ -27,7 +27,7 @@ Servizi esposti:
 - Postgres:5432 (user `postgres`, pass `postgres`)
 - Redis:6379
 - Meilisearch:7700 (`MEILI_MASTER_KEY=dev_key`)
-- MailHog UI:8025
+- MailHog SMTP:1025 (UI: http://localhost:8025)
 
 ## Setup
 
@@ -38,6 +38,8 @@ pnpm prisma migrate dev
 pnpm prisma db seed
 pnpm dev
 ```
+
+Configura le variabili ambiente creando un file `.env` a partire da `.env.example` e impostando `SMTP_FROM` con l'indirizzo mittente desiderato.
 
 Il seed crea un utente admin demo e un caso di esempio con tre targets.
 
