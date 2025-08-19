@@ -1,7 +1,13 @@
-import { Queue } from 'bullmq'
+import { Queue, type RedisOptions } from 'bullmq'
 import { env } from '@nulladata/config'
 
-export const exampleQueue = new Queue('example', {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  connection: { url: env.REDIS_URL } as any,
-})
+const redisUrl = new URL(env.REDIS_URL)
+
+const connection: RedisOptions = {
+  host: redisUrl.hostname,
+  port: Number(redisUrl.port),
+  ...(redisUrl.username ? { username: redisUrl.username } : {}),
+  ...(redisUrl.password ? { password: redisUrl.password } : {}),
+}
+
+export const exampleQueue = new Queue('example', { connection })
