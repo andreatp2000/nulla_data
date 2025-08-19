@@ -12,16 +12,14 @@ export default withAuth(
 
     const role = token.role as string
 
-    if (pathname.startsWith('/dashboard') || pathname.startsWith('/cases')) {
-      if (role !== 'client') {
+    if (pathname.startsWith('/admin')) {
+      if (role !== 'analyst' && role !== 'admin') {
         return NextResponse.redirect(new URL('/login', req.url))
       }
     }
 
-    if (pathname.startsWith('/admin') || pathname.startsWith('/manage')) {
-      if (role !== 'analyst' && role !== 'admin') {
-        return NextResponse.redirect(new URL('/login', req.url))
-      }
+    if (pathname.startsWith('/app')) {
+      // clients, analysts and admins allowed
     }
 
     return NextResponse.next()
@@ -34,10 +32,5 @@ export default withAuth(
 )
 
 export const config = {
-  matcher: [
-    '/dashboard/:path*',
-    '/cases/:path*',
-    '/admin/:path*',
-    '/manage/:path*',
-  ],
+  matcher: ['/admin/:path*', '/app/:path*'],
 }

@@ -42,6 +42,33 @@ enum RequestStatus {
   rejected
 }
 
+codex/update-snapshots-and-commit-changes-o58o1v
+enum TicketType {
+  general
+  erasure
+  deindex
+  incident
+  other
+}
+
+enum TicketPriority {
+  low
+  medium
+  high
+  urgent
+}
+
+enum TicketStatus {
+  inbox
+  triage
+  in_progress
+  waiting_client
+  resolved
+  closed
+}
+
+
+ main
 enum SentVia {
   EMAIL
   PDF_ONLY
@@ -162,10 +189,94 @@ model AuditLog {
   case        Case?    @relation(fields: [caseId], references: [id])
 }
 
+ codex/update-snapshots-and-commit-changes-o58o1v
+model Ticket {
+  id          String        @id @default(uuid())
+  code        String        @unique
+  title       String
+  description String
+  type        TicketType    @default(general)
+  priority    TicketPriority @default(medium)
+  status      TicketStatus  @default(inbox)
+  requesterId String
+  assigneeId  String?
+  caseId      String?
+  tags        String[]      @default([])
+  dueAt       DateTime?
+  closedAt    DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  requester   User          @relation("TicketRequester", fields: [requesterId], references: [id])
+  assignee    User?         @relation("TicketAssignee", fields: [assigneeId], references: [id])
+  case        Case?         @relation(fields: [caseId], references: [id])
+  comments    TicketComment[]
+  events      TicketEvent[]
+}
+
+model TicketComment {
+  id          String   @id @default(uuid())
+  ticketId    String
+  authorId    String
+  body        String
+  internal    Boolean  @default(false)
+  attachments Json[]   @default([])
+  createdAt   DateTime @default(now())
+  ticket      Ticket   @relation(fields: [ticketId], references: [id])
+  author      User     @relation(fields: [authorId], references: [id])
+}
+
+model TicketEvent {
+  id          String         @id @default(uuid())
+  ticketId    String
+  type        TicketEventType
+  payload     Json
+  createdAt   DateTime       @default(now())
+  actorUserId String?
+  ticket      Ticket         @relation(fields: [ticketId], references: [id])
+  actor       User?          @relation(fields: [actorUserId], references: [id])
+}
+
+enum TicketEventType {
+  created
+  updated
+  status_changed
+  assignee_changed
+  comment_added
+  attachment_added
+  emailed
+}
+
+model SLASetting {
+  id                   String     @id @default(uuid())
+  name                 String
+  forType              TicketType
+  targetResponseHours  Int
+  targetResolutionHours Int
+  active               Boolean    @default(true)
+}
+
+model NotificationSetting {
+  id            String  @id @default(uuid())
+  userId        String  @unique
+  emailOnAssign Boolean @default(true)
+  emailOnStatus Boolean @default(true)
+  user          User    @relation(fields: [userId], references: [id])
+}
+
+ main
 enum AuditAction {
   REQUEST_CREATE
   REQUEST_SEND
   REQUEST_FAIL
+ codex/update-snapshots-and-commit-changes-o58o1v
+  TICKET_CREATE
+  TICKET_UPDATE
+  TICKET_COMMENT
+  TICKET_STATUS
+  TICKET_ASSIGN
+  TICKET_CLOSE
+
+ main
 }
 
 model Invoice {
