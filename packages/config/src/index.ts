@@ -7,6 +7,7 @@ export const env = {
   SMTP_PORT: process.env.SMTP_PORT || '',
   SMTP_USER: process.env.SMTP_USER || '',
   SMTP_PASS: process.env.SMTP_PASS || '',
+  SMTP_FROM: process.env.SMTP_FROM || '',
   NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET || '',
   NEXTAUTH_URL: process.env.NEXTAUTH_URL || '',
   APP_BASE_URL: process.env.APP_BASE_URL || '',
