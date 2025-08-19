@@ -66,6 +66,7 @@ importers:
 
   apps/web:
     dependencies:
+in
       '@nulladata/config':
         specifier: workspace:*
         version: link:../../packages/config
@@ -73,7 +74,7 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui
       '@prisma/client':
-        specifier: ^5.16.1
+
         version: 5.22.0(prisma@5.22.0)
       bullmq:
         specifier: ^4.13.0
@@ -94,7 +95,7 @@ importers:
         specifier: ^0.13.0
         version: 0.13.0
       prisma:
-        specifier: ^5.16.1
+
         version: 5.22.0
       react:
         specifier: ^18.2.0
@@ -113,11 +114,7 @@ importers:
         specifier: ^3.3.5
         version: 3.4.17
 
-  packages/config:
-    dependencies:
-      zod:
-        specifier: ^4.0.17
-        version: 4.0.17
+
 
   packages/ui:
     dependencies:
@@ -646,6 +643,7 @@ packages:
 
   '@napi-rs/wasm-runtime@0.2.12':
     resolution: {integrity: sha512-ZVWUcfwY4E/yPitQJl481FjFo3K22D6qF0DuFH6Y/nbnE11GY5uguDxZMGXPQ8WQ0128MXQD7TnfHyK4oWoIJQ==}
+
 
   '@next/env@14.2.32':
     resolution: {integrity: sha512-n9mQdigI6iZ/DF6pCTwMKeWgF2e8lg7qgt5M7HXMLtyhZYMnf/u905M18sSpPmHL9MKp9JHo56C6jrD2EvWxng==}
@@ -3215,8 +3213,6 @@ packages:
     resolution: {integrity: sha512-AyeEbWOu/TAXdxlV9wmGcR0+yh2j3vYPGOECcIj2S7MkrLyC7ne+oye2BKTItt0ii2PHk4cDy+95+LshzbXnGg==}
     engines: {node: '>=12.20'}
 
-  zod@4.0.17:
-    resolution: {integrity: sha512-1PHjlYRevNxxdy2JZ8JcNAw7rX8V9P1AKkP+x/xZfxB0K5FYfuV+Ug6P/6NVSR2jHQ+FzDDoDHS04nYUsOIyLQ==}
 
 snapshots:
 
@@ -6862,5 +6858,3 @@ snapshots:
   yocto-queue@0.1.0: {}
 
   yocto-queue@1.2.1: {}
-
-  zod@4.0.17: {}

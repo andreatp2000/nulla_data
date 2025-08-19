@@ -1,9 +1,10 @@
+
 import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
 async function main() {
-  // Seed data if necessary
+
 }
 
 main()
@@ -12,4 +13,5 @@ main()
     process.exit(1)
   })
   .finally(async () => {
+n
   })

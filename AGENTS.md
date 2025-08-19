@@ -16,7 +16,7 @@ docker compose up -d
 - Postgres:5432 | user: postgres / pass: postgres
 - Redis:6379
 - Meili:7700 | MEILI_MASTER_KEY=dev_key
-- MailHog SMTP:1025 | UI: http://localhost:8025
+
 
 ## .env.example
 
@@ -25,13 +25,10 @@ REDIS_URL=redis://localhost:6379
 MEILI_HOST=http://localhost:7700
 MEILI_API_KEY=dev_key
 
-# MailHog SMTP host
-
 SMTP_HOST=localhost
 SMTP_PORT=1025
 SMTP_USER=
-SMTP_PASS=
-SMTP_FROM=no-reply@localhost
+
 NEXTAUTH_SECRET=changeme
 NEXTAUTH_URL=http://localhost:3000
 APP_BASE_URL=http://localhost:3000
