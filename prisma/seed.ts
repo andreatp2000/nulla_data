@@ -12,5 +12,6 @@ main()
     process.exit(1)
   })
   .finally(async () => {
-    await prisma.$disconnect()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    await (prisma as any).$disconnect()
   })
